@@ -44,10 +44,9 @@ export default function Home({ blog }) {
 
         <div className='grid grid-cols-3 gap-8'>
         {blog.map((d) => {
-          console.log(d.id)
           return(
             <Link key={d.id} href={`/blog/${d.id}`}>
-            <div>:{d.id}</div>
+            <div>:{d.title}</div>
             </Link>
           )
          
