@@ -18,7 +18,7 @@ export const getStaticPaths = async() => {
     console.log(paths)
     return {
         paths,
-        //fallbackでpathがなければ404を返す
+        // fallbackでpathがなければ404を返す
         fallback: false,
         
     } 
