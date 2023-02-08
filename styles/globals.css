@@ -133,3 +133,69 @@ a {
     color-scheme: dark;
   }
 }
+
+
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+a {
+    animation:cubic-bezier(0.075, 0.82, 0.165, 1)
+}
+.text-anime{
+    transition: .6s;
+}
+.text-anime.text-show{
+    transform: none;
+}
+
+.slider-anime{
+    transition: .8s;
+}
+.slider-anime.slider-show{
+    opacity:1;
+    transform: none;
+}
+.slider-div {
+    padding: 50px 10px 5px 10px;
+}
+.portforio{
+    transform: translateY(-200px);
+}
+.wrap {
+    /* background-color: rgb(224, 18, 217); */
+
+    /* background-image: linear-gradient(to right bottom, #414040, #444242, #5c5957, #b6b3b1, #8d7e71, #9c9a97, #918f8e, #595856, #4d4d4c, #463925, #957739, #634602); */
+}
+.bg-set {
+    /* background-image: linear-gradient(to right bottom, #414040, #444242, #5c5957, #b6b3b1, #5b5651, #9c9a97, #918f8e, #595856, #4d4d4c, #463925, #3b3a37, #32312f); */
+
+}
+
+.book-anime {
+    opacity: 0;
+    transition: 1s;
+    transform: translateY(50%);
+    /* transition-delay: 1s; */
+}
+
+.book-anime.book-show{
+    opacity: 1;
+    transform: translateY(-20%);
+}
+
+
+.nav-item {
+    transition: 1s ;
+  
+  }
+  .show {
+    opacity: 1;
+    display: block;
+    transition: 1s ;
+    transform: none;
+  
+  
+  }

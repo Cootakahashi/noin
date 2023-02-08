@@ -4,7 +4,12 @@ import Link from 'next/link'
 import { Inter } from '@next/font/google'
 import styles from '../styles/Home.module.css'
 import { client } from "../libs/client"
+import { Nav } from "../components/header"
+import { Footer } from "../components/footer"
+import { Event } from "../components/event"
 //SSG
+import React, { useState, useEffect } from 'react';
+
 export const getStaticProps = async() => {
   const data = await client.get({ endpoint: "noin" });
   return {
@@ -14,8 +19,16 @@ export const getStaticProps = async() => {
   };
 };
 
+
 export default function Home({ blog }) {
-  const lists = [1, 2, 10]
+  useEffect(() => {
+  const navitem = window.document.querySelector('.nav-item')
+  navitem.classList.add('show')
+})
+  //Microcmsの画像を使うときはloaderかnext.config設定が必要
+  const microCMSLoader = ({ src, width, quality }) => {
+    return `${src}?auto=format&fit=max&w=${width}`
+  }
   return (
     <>
       <Head>
@@ -24,6 +37,7 @@ export default function Home({ blog }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Nav/>
       <main className={styles.main}>
         <Image
         src="/canva/top.png"
@@ -31,28 +45,35 @@ export default function Home({ blog }) {
         width={1300}
         alt="content"
         />
-        TOP ARTICLE
-        <div className='grid grid-cols-3 gap-8'>
-        {lists.map((lis) => {
-          return (
-            <div key={lis}>Number:{lis}</div>
-          )
-           })}
-        </div>
 
-          <h2 className='m-10 p-10 text-center'>API</h2>
 
-        <div className='grid grid-cols-3 gap-8'>
+          <h2 className='m-10 p-10 text-center font-sans font-thin text-5xl'>Newest Article</h2>
+
+        <div className='grid grid-cols-3 gap-8 w-full text-center'>
         {blog.map((d) => {
+          const a = d.thumbnail.url
           return(
-            <Link key={d.id} href={`/blog/${d.id}`}>
-            <div>:{d.title}</div>
-            </Link>
+            <div>
+              <Link key={d.id} href={`/blog/${d.id}`}>
+                <div>
+                  <Image
+                  loader={microCMSLoader}
+                  src={a}
+                  height={500}
+                  width={300}
+                  alt="content"
+                  />
+                </div>
+              <div>:{d.title}</div>
+              </Link>
+            </div>
           )
          
            })}
            </div>
       </main>
+      <Event/>
+      <Footer/>
     </>
   )
 }

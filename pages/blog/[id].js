@@ -3,6 +3,7 @@ import { client } from '../../libs/client'
 import { renderToc } from '../../libs/render-toc'; // 追加
 import { TableOfContents } from '../../components/TableOfContents'; // TableOfContentsをインポートする
 import styles from '../../styles/id.module.css'
+import { Sidebar } from '../../components/sidebar'
 // SSG
 export const getStaticProps = async (context) => {
     const id = context.params.id;
@@ -34,23 +35,26 @@ export default function BlogId({ blog }) {
     const toc = renderToc(blog.body);
     console.log(toc);
     return (
-        <div className={styles.main}>
-        <main className='text-center'>
-            <div className='bg-gray-100'>
-                <div className='flex p-8 text-blue-300'>
-                <p>Category / { blog.category }</p>
-                <p className='ml-auto'>{ blog.publishedAt }</p>
+        <div className={`${styles.main} grid grid-cols-5`}>
+
+            <main className='text-center col-span-4'>
+                <div className='bg-gray-100 col-span-4'>
+                    <div className='flex p-8 text-blue-300'>
+                    <p>Category / { blog.category }</p>
+                    <p className='ml-auto'>{ blog.publishedAt }</p>
+                    </div>
+                    <h1 className=' text-5xl pb-8 ml-10 text-gray-900 text-left'>{ blog.title }</h1>
                 </div>
-                <h1 className=' text-5xl pb-8 ml-10 text-gray-900 text-left'>{ blog.title }</h1>
+                {blog.toc_visible && (
+                    <TableOfContents toc={toc} />
+                    )}
 
-
-            </div>
-            {blog.toc_visible && (
-                <TableOfContents toc={toc} />
-                )}
-
-            <div className='text-left' dangerouslySetInnerHTML={{__html: `${blog.body}`}}></div>
-        </main>
+                <div className='text-left' dangerouslySetInnerHTML={{__html: `${blog.body}`}}></div>
+   
+            </main>
+            <div col-span-1>
+                    <Sidebar/>
+                </div>
          </div>
     )
 }
