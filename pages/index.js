@@ -8,7 +8,7 @@ import { Nav } from "../components/header";
 import { Footer } from "../components/footer";
 import { Event } from "../components/event";
 import Script from "next/script";
-import * as gtag from "../lib/gtag";
+import * as gtag from "../libs/gtag";
 //SSG
 import React, { useState, useEffect } from "react";
 

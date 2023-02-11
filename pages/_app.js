@@ -1,6 +1,6 @@
 import "../styles/globals.css";
 import Script from "next/script";
-import * as gtag from "../lib/gtag";
+import * as gtag from "../libs/gtag";
 
 export default function App({ Component, pageProps }) {
   return (
